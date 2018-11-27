@@ -14,15 +14,15 @@ var ngAnnotate = require('gulp-ng-annotate');
 
 var environment = process.env.NODE_ENV;
 
-var nodemon = require('gulp-nodemon');
+//var nodemon = require('gulp-nodemon');
 
-function swallowError (error) {
-    //If you want details of the error in the console
-    console.log(error.toString());
-    this.emit('end');
+function swallowError(error) {
+  //If you want details of the error in the console
+  console.log(error.toString());
+  this.emit('end');
 }
 
-gulp.task('default', function(){
+gulp.task('default', function () {
   console.log('yo. use gulp watch or something');
 });
 
@@ -37,42 +37,42 @@ gulp.task('js', function () {
   b.bundle()
     .pipe(source('app.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(ngAnnotate())
     .on('error', swallowError)
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('app/client/build'));
 });
 
-gulp.task('semantic', function() {
+gulp.task('semantic', function () {
   gulp.src(['semantic/dist/**/*'])
     .pipe(gulp.dest('app/client/semantic'));
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', function () {
   gulp.src('app/client/stylesheets/site.scss')
     .pipe(sass())
-      .on('error', sass.logError)
+    .on('error', sass.logError)
     .pipe(cleanCss())
     .pipe(gulp.dest('app/client/build'));
 });
 
-gulp.task('build', ['js', 'sass'], function() {
+gulp.task('build', ['js', 'sass'], function () {
   // Yup, build the js and sass.
 });
 
-gulp.task('watch', ['js', 'sass'], function() {
+gulp.task('watch', ['js', 'sass'], function () {
   gulp.watch('app/client/src/**/*.js', ['js']);
   gulp.watch('app/client/views/**/*.js', ['js']);
   gulp.watch('app/client/stylesheets/**/*.scss', ['sass']);
 });
 
-gulp.task('server', ['watch'], function() {
-  nodemon({
-    script: 'app.js',
-    env: { 'NODE_ENV': process.env.NODE_ENV || 'DEV' },
-    watch: [
-      'app/server'
-    ]
-  });
-});
+// gulp.task('server', ['watch'], function() {
+//   nodemon({
+//     script: 'app.js',
+//     env: { 'NODE_ENV': process.env.NODE_ENV || 'DEV' },
+//     watch: [
+//       'app/server'
+//     ]
+//   });
+// });
