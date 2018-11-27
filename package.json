@@ -38,7 +38,7 @@
     "dev": "nodemon app.js",
     "prod": "gulp build && node app.js",
     "config": "cp .env.config .env",
-    "postinstall": "(cd semantic; gulp build) && gulp semantic && gulp build"
+    "postinstall": "cd semantic && gulp build && cd ../ && gulp semantic && gulp build"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
