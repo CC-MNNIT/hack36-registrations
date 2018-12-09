@@ -65,22 +65,21 @@
           <strong>
             Registration Deadline:
           </strong>
-          Sunday, January 1st 2019, 7:55 pm (India)
-          <!-- {{ timeClose }} -->
+          
+          Tuesday January 15 2019, 12:00 AM (IST)
         </div>
 
-        <div
+        <!-- <div
           ng-class="settings.timeConfirm"
           ng-if="dashState('admittedAndCanConfirm') || dashState('admittedAndCannotConfirm') || dashState('confirmed') || dashState('declined')">
           <strong>
             Confirmation Deadline:
           </strong>
-          <!-- {{ timeConfirm }} -->
-          Sunday, January 1st 2019, 7:55 pm (India)
-        </div>
+          Tuesday January 15 2019, 12:00 AM (IST)
+        </div> -->
 
         <div
-          ng-if="dashState('openAndIncomplete')"
+          ng-if="dashState('closedAndIncomplete')"
           class="description">
           <p>
             <strong>
@@ -99,7 +98,7 @@
         </div>
 
         <div
-          ng-if="dashState('openAndSubmitted')"
+          ng-if="dashState('closedAndSubmitted')"
           class="description">
           <p>
             <strong>
@@ -131,7 +130,7 @@
         </div>
 
         <div
-          ng-if="dashState('closedAndIncomplete')">
+          ng-if="dashState('openAndIncomplete')">
           <p>
             <strong>
                 {{ DASHBOARD.CLOSED_AND_INCOMPLETE_TITLE }}
@@ -143,7 +142,7 @@
         </div>
 
         <div
-          ng-if="dashState('closedAndSubmitted')"
+          ng-if="dashState('openAndSubmitted')"
           class="description" >
 
           <div

@@ -14,7 +14,7 @@ angular.module('reg')
     'UserService',
     'EVENT_INFO',
     'DASHBOARD',
-    function($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASHBOARD){
+    function ($rootScope, $scope, $sce, currentUser, settings, Utils, AuthService, UserService, EVENT_INFO, DASHBOARD) {
       var Settings = settings.data;
       var user = currentUser.data;
       $scope.user = user;
@@ -33,13 +33,15 @@ angular.module('reg')
       }
 
       // Is registration open?
-      var regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
+      // var regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
 
       // Is it past the user's confirmation time?
       var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
 
-      $scope.dashState = function(status){
+      $scope.dashState = function (status) {
         var user = $scope.user;
+        var regIsOpen = true;
+
         switch (status) {
           case 'unverified':
             return !user.verified;
@@ -71,7 +73,7 @@ angular.module('reg')
 
       $scope.showWaitlist = !regIsOpen && user.status.completedProfile && !user.status.admitted;
 
-      $scope.resendEmail = function(){
+      $scope.resendEmail = function () {
         AuthService
           .resendVerificationEmail()
           .then(response => {
@@ -88,36 +90,36 @@ angular.module('reg')
       $scope.confirmationText = $sce.trustAsHtml(converter.makeHtml(Settings.confirmationText));
       $scope.waitlistText = $sce.trustAsHtml(converter.makeHtml(Settings.waitlistText));
 
-      $scope.declineAdmission = function(){
+      $scope.declineAdmission = function () {
 
-      swal({
-        title: "Whoa!",
-        text: "Are you sure you would like to decline your admission? \n\n You can't go back!",
-        icon: "warning",
-        buttons: {
-          cancel: {
-            text: "Cancel",
-            value: null,
-            visible: true
-          },
-          confirm: {
-            text: "Yes, I can't make it",
-            value: true,
-            visible: true,
-            className: "danger-button"
+        swal({
+          title: "Whoa!",
+          text: "Are you sure you would like to decline your admission? \n\n You can't go back!",
+          icon: "warning",
+          buttons: {
+            cancel: {
+              text: "Cancel",
+              value: null,
+              visible: true
+            },
+            confirm: {
+              text: "Yes, I can't make it",
+              value: true,
+              visible: true,
+              className: "danger-button"
+            }
           }
-        }
-      }).then(value => {
-        if (!value) {
-          return;
-        }
+        }).then(value => {
+          if (!value) {
+            return;
+          }
 
-        UserService
-          .declineAdmission(user._id)
-          .then(response => {
-            $rootScope.currentUser = response.data;
-            $scope.user = response.data;
-          });
-      });
-    };
-  }]);
+          UserService
+            .declineAdmission(user._id)
+            .then(response => {
+              $rootScope.currentUser = response.data;
+              $scope.user = response.data;
+            });
+        });
+      };
+    }]);
