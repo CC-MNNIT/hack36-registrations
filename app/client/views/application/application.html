@@ -71,29 +71,22 @@
             <option value="N">I prefer not to answer.</option>
           </select>
         </div>
-
-        <div class="field">
-          <label>I would describe myself as a...</label>
-          <input type="text"
-                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
-                 ng-model="user.profile.description">
-        </div>
         <!-- additional fields -->
         <div class="field">
           <label>Resume URL </label>
-          <input class="ui input"
-                 ng-model="user.profile.resume">
+          <input class="ui input" name="resume"
+                 ng-model="user.profile.resume" required>
         </div>
         <div class="field">
           <label>Github URL </label>
-          <input class="ui input"
-                 ng-model="user.profile.github">
+          <input class="ui input" name="github"
+                 ng-model="user.profile.github" required>
         </div>
         <div class="field">
-          <label>Shirt Size (required)</label>
+          <label>Shirt Size</label>
           <select
             name="shirt"
-            ng-model="user.profile.shirtSize">
+            ng-model="user.profile.shirtSize" required>
               <option value="S">Small</option>
               <option value="M">Medium</option>
               <option value="L">Large</option>
@@ -101,7 +94,12 @@
               <option value="XXL">XX-Large</option>
           </select>
         </div>
-
+        <div class="field">
+          <label>I would describe myself as a...</label>
+          <input type="text" name="description"
+                 placeholder="Designer, Data Scientist, iOS Wizard, Hacker Extraordinaire"
+                 ng-model="user.profile.description">
+        </div>
         <div class="field">
           <label>
               What would you like to learn or get out of Hack36? (optional)
@@ -109,23 +107,6 @@
           <textarea ng-model="user.profile.essay">
           </textarea>
         </div>
-
-        <!-- <div class="field"
-             ng-hide="isMitStudent">
-          <p>
-            Because of limitations imposed by MIT, we are not legally allowed to host
-            non-MIT minors (those under 18) for HackMIT 2015. Checking the box below affirms that you are or will be 18 years or older by September 19th, 2015.
-          </p>
-          <p>
-            <strong>
-            We will be checking ID. If you are a non-MIT minor, you will be turned away at the door.
-            </strong>
-          </p>
-          <div class="ui checkbox">
-            <input type="checkbox" id="adult" ng-model="user.profile.adult">
-            <label for="adult">I am 18 or older.</label>
-          </div>
-        </div> -->
 
         <br>
 
