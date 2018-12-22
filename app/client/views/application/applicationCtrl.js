@@ -10,7 +10,7 @@ angular.module("reg").controller("ApplicationCtrl", [
   "settings",
   "Session",
   "UserService",
-  function(
+  function (
     $scope,
     $rootScope,
     $state,
@@ -41,7 +41,7 @@ angular.module("reg").controller("ApplicationCtrl", [
      * TODO: JANK WARNING
      */
     function populateSchools() {
-      $http.get("/assets/schools.json").then(function(res) {
+      $http.get("/assets/schools.json").then(function (res) {
         var schools = res.data;
         var email = $scope.user.email.split("@")[1];
 
@@ -51,7 +51,7 @@ angular.module("reg").controller("ApplicationCtrl", [
         }
       });
 
-      $http.get("/assets/schools.csv").then(function(res) {
+      $http.get("/assets/schools.csv").then(function (res) {
         $scope.schools = res.data.split("\n");
         $scope.schools.push("Other");
 
@@ -65,7 +65,7 @@ angular.module("reg").controller("ApplicationCtrl", [
         $("#school.ui.search").search({
           source: content,
           cache: true,
-          onSelect: function(result, response) {
+          onSelect: function (result, response) {
             $scope.user.profile.school = result.title.trim();
           }
         });
@@ -105,7 +105,7 @@ angular.module("reg").controller("ApplicationCtrl", [
 
     function _setupForm() {
       // Custom minors validation rule
-      $.fn.form.settings.rules.allowMinors = function(value) {
+      $.fn.form.settings.rules.allowMinors = function (value) {
         return minorsValidation();
       };
 
@@ -149,6 +149,42 @@ angular.module("reg").controller("ApplicationCtrl", [
               }
             ]
           },
+          resume: {
+            identifier: "resume",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please enter resume link"
+              }
+            ]
+          },
+          github: {
+            identifier: "github",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please enter github link"
+              }
+            ]
+          },
+          shirt: {
+            identifier: "shirt",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please select a shirt size"
+              }
+            ]
+          },
+          description: {
+            identifier: "description",
+            rules: [
+              {
+                type: "empty",
+                prompt: "Please fill this field "
+              }
+            ]
+          },
           adult: {
             identifier: "adult",
             rules: [
@@ -162,7 +198,7 @@ angular.module("reg").controller("ApplicationCtrl", [
       });
     }
 
-    $scope.submitForm = function() {
+    $scope.submitForm = function () {
       if ($(".ui.form").form("is valid")) {
         _updateUser();
       } else {
