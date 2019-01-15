@@ -262,6 +262,9 @@ UserController.getById = function (id, callback) {
  * @param  {Function} callback Callback with args (err, user)
  */
 UserController.updateProfileById = function (id, profile, callback) {
+  return callback({
+    message: "Sorry, registration is closed."
+  });
   // Validate the user profile, and mark the user as profile completed
   // when successful.
   User.validateProfile(profile, function (err) {
