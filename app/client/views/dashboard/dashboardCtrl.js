@@ -34,7 +34,7 @@ angular.module('reg')
 
       // Is registration open?
       // var regIsOpen = $scope.regIsOpen = Utils.isRegOpen(Settings);
-      var regIsOpen = true;
+      var regIsOpen = false;
 
       // Is it past the user's confirmation time?
       var pastConfirmation = $scope.pastConfirmation = Utils.isAfter(user.status.confirmBy);
